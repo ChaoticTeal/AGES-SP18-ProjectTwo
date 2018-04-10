@@ -6,6 +6,12 @@ using UnityEngine;
 public class PlayerMovement: MonoBehaviour 
 {
     // SerializeFields
+    [Tooltip("Time to wait after an arrow is fired.")]
+    [SerializeField]
+    float arrowCooldown = 1f;
+    [Tooltip("Time to wait before an arrow is fired.")]
+    [SerializeField]
+    float arrowDelay;
     [Tooltip("Player move speed.")]
     [SerializeField]
     float moveSpeed = 5f;
@@ -26,6 +32,10 @@ public class PlayerMovement: MonoBehaviour
     string fireButton;
 
     // Private fields
+    /// <summary>
+    /// Animator attached to the player
+    /// </summary>
+    Animator animator;
     /// <summary>
     /// Can the player move?
     /// </summary>
@@ -55,10 +65,11 @@ public class PlayerMovement: MonoBehaviour
     /// </summary>
     Rigidbody2D rigidbody2D;
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start () 
 	{
         rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -85,6 +96,7 @@ public class PlayerMovement: MonoBehaviour
     {
         horizontalInput = Input.GetAxis(horizontalAxis);
         verticalInput = Input.GetAxis(verticalAxis);
+        animator.SetFloat("speed", Mathf.Max(Mathf.Abs(horizontalInput), Mathf.Abs(verticalInput)));
     }
 
     /// <summary>
@@ -101,6 +113,8 @@ public class PlayerMovement: MonoBehaviour
     private void GetFireInput()
     {
         shouldFire = Input.GetButtonDown(fireButton);
+        if(shouldFire)
+            animator.SetBool("shouldAttack", true);
     }
 
     /// <summary>
@@ -110,9 +124,7 @@ public class PlayerMovement: MonoBehaviour
     {
         if (shouldFire)
         {
-            GameObject temp =  Instantiate(arrow);
-            temp.transform.position = shootPoints[(int)currentDirection].position;
-            temp.transform.rotation = shootPoints[(int)currentDirection].rotation;
+            StartCoroutine(FireArrow());
         }
     }
 
@@ -129,5 +141,23 @@ public class PlayerMovement: MonoBehaviour
             currentDirection = DIRECTIONS.Top;
         else if (verticalInput < 0)
             currentDirection = DIRECTIONS.Bottom;
+        animator.SetInteger("direction", (int)currentDirection);
+    }
+
+    /// <summary>
+    /// Fire an arrow and pause
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator FireArrow()
+    {
+        canMove = false;
+        yield return new WaitForSeconds(arrowDelay);
+        GameObject temp = Instantiate(arrow);
+        temp.transform.position = shootPoints[(int)currentDirection].position;
+        temp.transform.rotation = shootPoints[(int)currentDirection].rotation;
+        yield return new WaitForSeconds(arrowCooldown);
+        shouldFire = false;
+        canMove = true;
+        animator.SetBool("shouldAttack", false);
     }
 }

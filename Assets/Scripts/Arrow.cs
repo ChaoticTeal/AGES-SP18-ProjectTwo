@@ -23,11 +23,19 @@ public class Arrow : MonoBehaviour
 	{
         rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.velocity = transform.up * arrowSpeed;
+        StartCoroutine(DestroyArrow());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         rigidbody2D.bodyType = RigidbodyType2D.Static;
         Destroy(gameObject, arrowLifeTime);
+    }
+
+    IEnumerator DestroyArrow()
+    {
+        yield return new WaitForSeconds(15f);
+        if (gameObject != null)
+            Destroy(gameObject);
     }
 }
