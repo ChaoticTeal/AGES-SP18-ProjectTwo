@@ -11,6 +11,12 @@ public class Target : MonoBehaviour
     [Tooltip("Minimum time between shine animations.")]
     [SerializeField]
     float shineDelayMin;
+    [Tooltip("Target index.")]
+    [SerializeField]
+    int targetIndex;
+    [Tooltip("Target type. 0 for single-target, door opens.")]
+    [SerializeField]
+    int targetType;
     [Tooltip("Door to open.")]
     [SerializeField]
     GameObject door;
@@ -28,6 +34,12 @@ public class Target : MonoBehaviour
     /// </summary>
     bool hit;
 
+    // Public fields
+    /// <summary>
+    /// Notify on hit
+    /// </summary>
+    //public static event ;
+    
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -40,6 +52,8 @@ public class Target : MonoBehaviour
         {
             hit = true;
             animator.SetBool("hit", true);
+            //if (OnHit != null)
+            //    OnHit.Invoke();
             door.SetActive(false);
         }
     }

@@ -37,6 +37,10 @@ public class PlayerMovement: MonoBehaviour
     /// </summary>
     Animator animator;
     /// <summary>
+    /// Can the player change screens?
+    /// </summary>
+    bool canChangeScreens = true;
+    /// <summary>
     /// Can the player move?
     /// </summary>
     bool canMove = true;
@@ -64,6 +68,16 @@ public class PlayerMovement: MonoBehaviour
     /// Player Rigidbody2D
     /// </summary>
     Rigidbody2D rigidbody2D;
+    /// <summary>
+    /// Player scale
+    /// </summary>
+    Vector3 scale;
+
+    // Public fields
+    /// <summary>
+    /// Notify when entering a screen edge trigger
+    /// </summary>
+    public static event Action<string> ScreenChangeTrigger;
 
     // Use this for initialization
     void Start () 
@@ -77,6 +91,8 @@ public class PlayerMovement: MonoBehaviour
 	{
         GetMoveInput();
         GetFireInput();
+        if (!canMove)
+            rigidbody2D.velocity = Vector3.zero;
 	}
 
     private void FixedUpdate()
@@ -87,6 +103,16 @@ public class PlayerMovement: MonoBehaviour
             Move();
             Fire();
         }
+    }
+
+    private void OnEnable()
+    {
+        CameraController.OnMoveFinished += EndScreenTransition;
+    }
+
+    private void OnDisable()
+    {
+        CameraController.OnMoveFinished -= EndScreenTransition;
     }
 
     /// <summary>
@@ -118,7 +144,7 @@ public class PlayerMovement: MonoBehaviour
     }
 
     /// <summary>
-    /// Shoot an arrow
+    /// Shoot
     /// </summary>
     private void Fire()
     {
@@ -159,5 +185,39 @@ public class PlayerMovement: MonoBehaviour
         shouldFire = false;
         canMove = true;
         animator.SetBool("shouldAttack", false);
+    }
+
+    void EndScreenTransition()
+    {
+        canMove = true;
+        canChangeScreens = true;
+        transform.localScale = scale;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (canChangeScreens)
+        {
+            // Loop through each of the four directions checking for screen shift tags
+            foreach (string s in Enum.GetNames(typeof(DIRECTIONS)))
+            {
+                if (collision.tag == s)
+                {
+                    // Send the event with the direction that matches
+                    if (ScreenChangeTrigger != null)
+                    {
+                        ScreenChangeTrigger.Invoke(s);
+                        // Disable movement and screen changing
+                        canMove = false;
+                        canChangeScreens = false;
+                        // Move to the exit of the screen trigger
+                        transform.position = collision.GetComponent<ScreenChangeTrigger>().exit.position;
+                        // Make the player invisible temporarily
+                        scale = transform.localScale;
+                        transform.localScale = Vector3.zero;
+                    }
+                }
+            }
+        }
     }
 }
