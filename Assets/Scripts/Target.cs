@@ -11,18 +11,46 @@ public class Target : MonoBehaviour
     [Tooltip("Minimum time between shine animations.")]
     [SerializeField]
     float shineDelayMin;
-    [Tooltip("Target index.")]
-    [SerializeField]
-    int targetIndex;
-    [Tooltip("Target type. 0 for single-target, door opens.")]
-    [SerializeField]
-    int targetType;
-    [Tooltip("Door to open.")]
-    [SerializeField]
-    GameObject door;
     [Tooltip("Projectile layer.")]
     [SerializeField]
     int projectileLayer;
+    [Tooltip("Target index.")]
+    [SerializeField]
+    int targetIndex_UseProperty;
+    [Tooltip("Target type.\n0 for single target/door opens.\n1 for double target/door opens.")]
+    [SerializeField]
+    int targetType_UseProperty;
+
+    // Properties
+    bool Hit
+    {
+        get
+        {
+            return hit_UseProperty;
+        }
+        set
+        {
+            hit_UseProperty = true;
+            if (hit_UseProperty)
+                if (OnHit != null)
+                    // Notify that the target was hit, with its type and index
+                    OnHit.Invoke(TargetType, TargetIndex);
+        }
+    }
+    public int TargetType
+    {
+        get
+        {
+            return targetType_UseProperty;
+        }
+    }
+    public int TargetIndex
+    {
+        get
+        {
+            return targetIndex_UseProperty;
+        }
+    }
 
     // Private fields
     /// <summary>
@@ -32,13 +60,13 @@ public class Target : MonoBehaviour
     /// <summary>
     /// Has the target been hit?
     /// </summary>
-    bool hit;
+    bool hit_UseProperty;
 
     // Public fields
     /// <summary>
     /// Notify on hit
     /// </summary>
-    //public static event ;
+    public static event System.Action<int, int> OnHit;
     
     private void Start()
     {
@@ -50,17 +78,14 @@ public class Target : MonoBehaviour
     {
         if (collision.gameObject.layer == projectileLayer)
         {
-            hit = true;
+            Hit = true;
             animator.SetBool("hit", true);
-            //if (OnHit != null)
-            //    OnHit.Invoke();
-            door.SetActive(false);
         }
     }
 
     IEnumerator ShineAnim()
     {
-        while(!hit)
+        while(!Hit)
         {
             animator.SetBool("shouldShine", true);
             yield return null;

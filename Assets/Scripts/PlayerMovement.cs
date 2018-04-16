@@ -18,6 +18,9 @@ public class PlayerMovement: MonoBehaviour
     [Tooltip("Arrow prefab.")]
     [SerializeField]
     GameObject arrow;
+    [Tooltip("Key prefab.")]
+    [SerializeField]
+    GameObject projectileKey;
     [Tooltip("Origin points for arrows. T, R, B, L.")]
     [SerializeField]
     List<Transform> shootPoints;
@@ -65,6 +68,10 @@ public class PlayerMovement: MonoBehaviour
     /// </summary>
     float verticalInput;
     /// <summary>
+    /// Keys collected
+    /// </summary>
+    int keyCount_UseProperty;
+    /// <summary>
     /// Player Rigidbody2D
     /// </summary>
     Rigidbody2D rigidbody2D;
@@ -78,6 +85,25 @@ public class PlayerMovement: MonoBehaviour
     /// Notify when entering a screen edge trigger
     /// </summary>
     public static event Action<string> ScreenChangeTrigger;
+    /// <summary>
+    /// Notify when collecting a key
+    /// </summary>
+    public static event Action<int> KeyCollected;
+
+    // Properties
+    int KeyCount
+    {
+        get
+        {
+            return keyCount_UseProperty;
+        }
+        set
+        {
+            keyCount_UseProperty = value;
+            if (KeyCollected != null)
+                KeyCollected.Invoke(keyCount_UseProperty);
+        }
+    }
 
     // Use this for initialization
     void Start () 
@@ -91,6 +117,8 @@ public class PlayerMovement: MonoBehaviour
 	{
         GetMoveInput();
         GetFireInput();
+        if (shouldFire && canMove)
+            StartCoroutine(FireArrow());
         if (!canMove)
             rigidbody2D.velocity = Vector3.zero;
 	}
@@ -101,7 +129,6 @@ public class PlayerMovement: MonoBehaviour
         {
             SetDirection();
             Move();
-            Fire();
         }
     }
 
@@ -139,19 +166,6 @@ public class PlayerMovement: MonoBehaviour
     private void GetFireInput()
     {
         shouldFire = Input.GetButtonDown(fireButton);
-        if(shouldFire)
-            animator.SetBool("shouldAttack", true);
-    }
-
-    /// <summary>
-    /// Shoot
-    /// </summary>
-    private void Fire()
-    {
-        if (shouldFire)
-        {
-            StartCoroutine(FireArrow());
-        }
     }
 
     /// <summary>
@@ -176,27 +190,46 @@ public class PlayerMovement: MonoBehaviour
     /// <returns></returns>
     IEnumerator FireArrow()
     {
+        animator.SetBool("shouldAttack", true);
         canMove = false;
         yield return new WaitForSeconds(arrowDelay);
-        GameObject temp = Instantiate(arrow);
-        temp.transform.position = shootPoints[(int)currentDirection].position;
-        temp.transform.rotation = shootPoints[(int)currentDirection].rotation;
+        if (KeyCount < 1)
+        {
+            GameObject temp = Instantiate(arrow);
+            temp.transform.position = shootPoints[(int)currentDirection].position;
+            temp.transform.rotation = shootPoints[(int)currentDirection].rotation;
+        }
+        else
+        {
+            GameObject temp = Instantiate(projectileKey);
+            temp.transform.position = shootPoints[(int)currentDirection].position;
+            temp.transform.rotation = shootPoints[(int)currentDirection].rotation;
+        }
         yield return new WaitForSeconds(arrowCooldown);
         shouldFire = false;
         canMove = true;
         animator.SetBool("shouldAttack", false);
     }
 
+    IEnumerator ScreenChangeCooldown()
+    {
+        yield return new WaitForSeconds(1.0f);
+        canChangeScreens = true;
+    }
+
     void EndScreenTransition()
     {
         canMove = true;
-        canChangeScreens = true;
+        animator.enabled = true;
         transform.localScale = scale;
+        StartCoroutine(ScreenChangeCooldown());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (canChangeScreens)
+        if (collision.tag == "Key")
+            KeyCount++;
+        else if (canChangeScreens)
         {
             // Loop through each of the four directions checking for screen shift tags
             foreach (string s in Enum.GetNames(typeof(DIRECTIONS)))
@@ -209,6 +242,7 @@ public class PlayerMovement: MonoBehaviour
                         ScreenChangeTrigger.Invoke(s);
                         // Disable movement and screen changing
                         canMove = false;
+                        animator.enabled = false;
                         canChangeScreens = false;
                         // Move to the exit of the screen trigger
                         transform.position = collision.GetComponent<ScreenChangeTrigger>().exit.position;

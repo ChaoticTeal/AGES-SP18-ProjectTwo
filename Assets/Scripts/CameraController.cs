@@ -60,13 +60,13 @@ public class CameraController : MonoBehaviour
                 newPosition += new Vector3(0, screenHeight);
                 break;
             case "Right":
-                newPosition += new Vector3(0, screenWidth);
+                newPosition += new Vector3(screenWidth, 0);
                 break;
             case "Bottom":
                 newPosition += new Vector3(0, -screenHeight);
                 break;
             case "Left":
-                newPosition += new Vector3(0, -screenWidth);
+                newPosition += new Vector3(-screenWidth, 0);
                 break;
         }
         if (newPosition != transform.position)
