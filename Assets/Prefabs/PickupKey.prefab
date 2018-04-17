@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4815224247235600}
   - component: {fileID: 212018377162213458}
   - component: {fileID: 61190114575714960}
+  - component: {fileID: 114879738293473546}
   m_Layer: 0
   m_Name: PickupKey
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3125, y: 1.1875}
   m_EdgeRadius: 0
+--- !u!114 &114879738293473546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1032053943513370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc44e374ebb8f6459124337e34d11ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleIndex_UseProperty: 0
+  puzzleType_UseProperty: 0
 --- !u!212 &212018377162213458
 SpriteRenderer:
   m_ObjectHideFlags: 1

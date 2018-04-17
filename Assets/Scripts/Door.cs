@@ -15,6 +15,9 @@ public class Door : MonoBehaviour, IPuzzleSolution
     int targetsHit_UseProperty;
 
     // SerializeFields
+    [Tooltip("Door index.")]
+    [SerializeField]
+    int puzzleIndex_UseProperty;
     /// <summary>
     /// What type of puzzle will open this door?
     /// 0 for single target/door open
@@ -23,9 +26,6 @@ public class Door : MonoBehaviour, IPuzzleSolution
     [Tooltip("What type of puzzle will open this door?\n0 for single target/door opens.\n1 for double target/door opens.")]
     [SerializeField]
     int puzzleType_UseProperty;
-    [Tooltip("Door index.")]
-    [SerializeField]
-    int puzzleIndex_UseProperty;
 
     // Properties
     public bool IsSolved

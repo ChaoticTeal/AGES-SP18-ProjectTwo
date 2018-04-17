@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     /// <param name="index">The index of the target.</param>
     private void TargetHandler(int type, int index)
     {
+        Debug.Log(type + " Target " + index + " hit.");
         // Loop through solutions
         foreach(GameObject s in solutions)
         {

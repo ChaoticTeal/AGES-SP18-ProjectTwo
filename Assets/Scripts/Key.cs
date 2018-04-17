@@ -13,8 +13,19 @@ public class Key : MonoBehaviour, IPuzzleSolution
     /// How many corresponding targets have been hit?
     /// </summary>
     int targetsHit_UseProperty;
+    /// <summary>
+    /// Renderer on the object
+    /// </summary>
+    Renderer renderer;
+    /// <summary>
+    /// Collider on the object
+    /// </summary>
+    BoxCollider2D boxCollider;
 
     // SerializeFields
+    [Tooltip("Key index.")]
+    [SerializeField]
+    int puzzleIndex_UseProperty;
     /// <summary>
     /// What type of puzzle will spawn this key?
     /// 0 for single target/key spawn
@@ -23,9 +34,6 @@ public class Key : MonoBehaviour, IPuzzleSolution
     [Tooltip("What type of puzzle will spawn this key?\n0 for single target/key spawns.\n1 for double target/key spawns.")]
     [SerializeField]
     int puzzleType_UseProperty;
-    [Tooltip("Key index.")]
-    [SerializeField]
-    int puzzleIndex_UseProperty;
 
     public bool IsSolved
     {
@@ -68,13 +76,18 @@ public class Key : MonoBehaviour, IPuzzleSolution
 
     public void DoSolution()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Key " + PuzzleIndex + " enabled");
+        renderer.enabled = true;
+        boxCollider.enabled = true;
     }
 
     // Use this for initialization
     void Start () 
 	{
-		
+        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider.enabled = false;
+        renderer = GetComponent<Renderer>();
+        renderer.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -82,4 +95,13 @@ public class Key : MonoBehaviour, IPuzzleSolution
 	{
 		
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            boxCollider.enabled = false;
+            renderer.enabled = false;
+        }
+    }
 }

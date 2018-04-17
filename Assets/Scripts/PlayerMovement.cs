@@ -135,11 +135,13 @@ public class PlayerMovement: MonoBehaviour
     private void OnEnable()
     {
         CameraController.OnMoveFinished += EndScreenTransition;
+        LockedDoor.DoorUnlocked += UseKey;
     }
 
     private void OnDisable()
     {
         CameraController.OnMoveFinished -= EndScreenTransition;
+        LockedDoor.DoorUnlocked -= UseKey;
     }
 
     /// <summary>
@@ -223,6 +225,11 @@ public class PlayerMovement: MonoBehaviour
         animator.enabled = true;
         transform.localScale = scale;
         StartCoroutine(ScreenChangeCooldown());
+    }
+
+    void UseKey()
+    {
+        KeyCount--;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
