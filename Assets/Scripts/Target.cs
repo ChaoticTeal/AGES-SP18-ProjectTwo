@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour 
+public class Target : MonoBehaviour
 {
     // SerializeFields
     [Tooltip("Maximum time between shine animations.")]
@@ -20,31 +21,43 @@ public class Target : MonoBehaviour
     [Tooltip("Target type.\n0 for single target/door opens.\n1 for double target/door opens.")]
     [SerializeField]
     int targetType_UseProperty;
+    [Tooltip("Time target remains active.\nIf 0, timer remains active indefinitely.")]
+    [SerializeField]
+    float timerLength;
 
     // Properties
-    bool Hit
+    bool Activated
     {
         get
         {
-            return hit_UseProperty;
+            return activated_UseProperty;
         }
         set
         {
-            hit_UseProperty = true;
-            if (hit_UseProperty)
-                if (OnHit != null)
+            activated_UseProperty = value;
+            Debug.Log(activated_UseProperty);
+            if (activated_UseProperty)
+            {
+                if (OnActivated != null)
                     // Notify that the target was hit, with its type and index
-                    OnHit.Invoke(TargetType, TargetIndex);
+                    OnActivated.Invoke(TriggerType, TriggerIndex);
+            }
+            else if(OnDeactivated != null)
+            {
+                OnDeactivated.Invoke(TriggerType, TriggerIndex);
+                StartCoroutine(ShineAnim());
+            }
+                    
         }
     }
-    public int TargetType
+    public int TriggerType
     {
         get
         {
             return targetType_UseProperty;
         }
     }
-    public int TargetIndex
+    public int TriggerIndex
     {
         get
         {
@@ -60,13 +73,17 @@ public class Target : MonoBehaviour
     /// <summary>
     /// Has the target been hit?
     /// </summary>
-    bool hit_UseProperty;
+    bool activated_UseProperty;
 
     // Public fields
     /// <summary>
     /// Notify on hit
     /// </summary>
-    public static event System.Action<int, int> OnHit;
+    public static event Action<int, int> OnActivated;
+    /// <summary>
+    /// Notify deactivation
+    /// </summary>
+    public static event Action<int, int> OnDeactivated;
     
     private void Start()
     {
@@ -78,19 +95,29 @@ public class Target : MonoBehaviour
     {
         if (collision.gameObject.layer == projectileLayer)
         {
-            Hit = true;
+            Activated = true;
             animator.SetBool("hit", true);
+            if (timerLength > 0)
+                StartCoroutine(TargetTimer());
         }
+    }
+
+    private IEnumerator TargetTimer()
+    {
+        yield return new WaitForSeconds(timerLength);
+        Debug.Log("Deactivating target.");
+        Activated = false;
+        animator.SetBool("hit", false);
     }
 
     IEnumerator ShineAnim()
     {
-        while(!Hit)
+        while(!Activated)
         {
             animator.SetBool("shouldShine", true);
             yield return null;
             animator.SetBool("shouldShine", false);
-            yield return new WaitForSeconds(Random.Range(shineDelayMin, shineDelayMax));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(shineDelayMin, shineDelayMax));
         }
     }
 }

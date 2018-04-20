@@ -12,4 +12,5 @@ public interface IPuzzleSolution
 
     // Methods
     void DoSolution();
+    void UndoSolution();
 }

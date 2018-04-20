@@ -13,6 +13,14 @@ public class Door : MonoBehaviour, IPuzzleSolution
     /// How many corresponding targets have been hit?
     /// </summary>
     int targetsHit_UseProperty;
+    /// <summary>
+    /// The renderer attached to the door
+    /// </summary>
+    Renderer renderer;
+    /// <summary>
+    /// The collider attached to the door
+    /// </summary>
+    Collider2D collider;
 
     // SerializeFields
     [Tooltip("Door index.")]
@@ -37,8 +45,8 @@ public class Door : MonoBehaviour, IPuzzleSolution
         set
         {
             isSolved_UseProperty = value;
-            if (isSolved_UseProperty)
-                gameObject.SetActive(false);
+            renderer.enabled = !isSolved_UseProperty;
+            collider.enabled = !isSolved_UseProperty;
         }
     }
     public int PuzzleType
@@ -67,8 +75,19 @@ public class Door : MonoBehaviour, IPuzzleSolution
         }
     }
 
+    private void Start()
+    {
+        renderer = GetComponent<Renderer>();
+        collider = GetComponent<Collider2D>();
+    }
+
     public void DoSolution()
     {
         IsSolved = true;
+    }
+
+    public void UndoSolution()
+    {
+        IsSolved = false;
     }
 }

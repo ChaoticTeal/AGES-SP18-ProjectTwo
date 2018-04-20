@@ -6,6 +6,10 @@ public class Key : MonoBehaviour, IPuzzleSolution
 {
     // Private fields
     /// <summary>
+    /// Has the key been collected?
+    /// </summary>
+    bool isCollected;
+    /// <summary>
     /// Is the key active?
     /// </summary>
     bool isSolved_UseProperty;
@@ -76,9 +80,20 @@ public class Key : MonoBehaviour, IPuzzleSolution
 
     public void DoSolution()
     {
-        Debug.Log("Key " + PuzzleIndex + " enabled");
-        renderer.enabled = true;
-        boxCollider.enabled = true;
+        if (!isCollected)
+        {
+            renderer.enabled = true;
+            boxCollider.enabled = true;
+        }
+    }
+
+    public void UndoSolution()
+    {
+        if (!isCollected)
+        {
+            boxCollider.enabled = false;
+            renderer.enabled = false;
+        }
     }
 
     // Use this for initialization
@@ -100,6 +115,7 @@ public class Key : MonoBehaviour, IPuzzleSolution
     {
         if(collision.tag == "Player")
         {
+            isCollected = true;
             boxCollider.enabled = false;
             renderer.enabled = false;
         }
