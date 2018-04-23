@@ -136,12 +136,14 @@ public class PlayerMovement: MonoBehaviour
     {
         CameraController.OnMoveFinished += EndScreenTransition;
         LockedDoor.DoorUnlocked += UseKey;
+        MenuManager.GameStarting += StopMove;
     }
 
     private void OnDisable()
     {
         CameraController.OnMoveFinished -= EndScreenTransition;
         LockedDoor.DoorUnlocked -= UseKey;
+        MenuManager.GameStarting -= StopMove;
     }
 
     /// <summary>
@@ -217,6 +219,11 @@ public class PlayerMovement: MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         canChangeScreens = true;
+    }
+
+    void StopMove()
+    {
+        canMove = false;
     }
 
     void EndScreenTransition()
