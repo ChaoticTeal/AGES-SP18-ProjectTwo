@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 47592171}
   - component: {fileID: 47592170}
   - component: {fileID: 47592174}
+  - component: {fileID: 47592175}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -304,6 +305,18 @@ MonoBehaviour:
   screenHeight: 18
   screenWidth: 30
   positionMargin: 0.05
+--- !u!114 &47592175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 47592169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: b92c74a83ca7fbf4ba6d023d3f22d6ca, type: 2}
 --- !u!1 &99091415
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +327,8 @@ GameObject:
   - component: {fileID: 99091416}
   - component: {fileID: 99091418}
   - component: {fileID: 99091417}
+  - component: {fileID: 99091419}
+  - component: {fileID: 99091420}
   m_Layer: 5
   m_Name: EntryOne
   m_TagString: Untagged
@@ -371,15 +386,51 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TinyRPGForest Assets by ansimuz
-
-    https://goo.gl/mAhFc9'
+  m_Text: TinyRPGForest Assets by ansimuz
 --- !u!222 &99091418
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 99091415}
+--- !u!61 &99091419
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 99091415}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &99091420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 99091415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cac86b763d95154b9b50db251f2a0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  link: https://goo.gl/mAhFc9
+  projectileLayer: 9
 --- !u!1 &154031735
 GameObject:
   m_ObjectHideFlags: 0
@@ -7994,6 +8045,8 @@ GameObject:
   - component: {fileID: 831876055}
   - component: {fileID: 831876057}
   - component: {fileID: 831876056}
+  - component: {fileID: 831876059}
+  - component: {fileID: 831876058}
   m_Layer: 5
   m_Name: Game
   m_TagString: Untagged
@@ -8058,6 +8111,44 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 831876054}
+--- !u!114 &831876058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 831876054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cac86b763d95154b9b50db251f2a0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  link: www.joshuawhittom.com
+  projectileLayer: 9
+--- !u!61 &831876059
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 831876054}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 50, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &901260980
 GameObject:
   m_ObjectHideFlags: 0
@@ -8068,6 +8159,8 @@ GameObject:
   - component: {fileID: 901260981}
   - component: {fileID: 901260983}
   - component: {fileID: 901260982}
+  - component: {fileID: 901260984}
+  - component: {fileID: 901260985}
   m_Layer: 5
   m_Name: EntryTwo
   m_TagString: Untagged
@@ -8125,15 +8218,51 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Berkshire Swash Font by Astigmatic
-
-    https://goo.gl/mqo7Gi'
+  m_Text: Berkshire Swash Font by Astigmatic
 --- !u!222 &901260983
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 901260980}
+--- !u!61 &901260984
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 901260980}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 30, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &901260985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 901260980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cac86b763d95154b9b50db251f2a0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  link: https://goo.gl/mqo7Gi
+  projectileLayer: 9
 --- !u!1 &919428176
 GameObject:
   m_ObjectHideFlags: 0
@@ -19172,7 +19301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c82b307fbd04840a60fb38cc6ab564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 3
+  fadeTime: 1
   exitPanel: {fileID: 824909411}
   fadePanel: {fileID: 1085808505}
   nextScene: Game

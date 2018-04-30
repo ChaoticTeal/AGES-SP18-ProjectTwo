@@ -230,7 +230,7 @@ public class PlayerMovement: MonoBehaviour
     {
         canMove = true;
         animator.enabled = true;
-        transform.localScale = scale;
+        GetComponent<SpriteRenderer>().enabled = true;
         StartCoroutine(ScreenChangeCooldown());
     }
 
@@ -261,8 +261,8 @@ public class PlayerMovement: MonoBehaviour
                         // Move to the exit of the screen trigger
                         transform.position = collision.GetComponent<ScreenChangeTrigger>().exit.position;
                         // Make the player invisible temporarily
-                        scale = transform.localScale;
-                        transform.localScale = Vector3.zero;
+                        GetComponent<SpriteRenderer>().enabled = false;
+                        animator.enabled = false;
                     }
                 }
             }
