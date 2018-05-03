@@ -9,6 +9,7 @@ TagManager:
   - Bottom
   - Left
   - Key
+  - TempWall
   layers:
   - Default
   - TransparentFX
