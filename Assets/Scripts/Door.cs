@@ -10,6 +10,10 @@ public class Door : MonoBehaviour, IPuzzleSolution
     /// </summary>
     bool isSolved_UseProperty;
     /// <summary>
+    /// Is the collider overlapping the player?
+    /// </summary>
+    bool overlapping;
+    /// <summary>
     /// How many corresponding targets have been hit?
     /// </summary>
     int targetsHit_UseProperty;
@@ -21,19 +25,21 @@ public class Door : MonoBehaviour, IPuzzleSolution
     /// The collider attached to the door
     /// </summary>
     Collider2D collider;
+    /// <summary>
+    /// The composite collider
+    /// </summary>
+    CompositeCollider2D compCollider;
 
     // SerializeFields
     [Tooltip("Door index.")]
     [SerializeField]
     int puzzleIndex_UseProperty;
-    /// <summary>
-    /// What type of puzzle will open this door?
-    /// 0 for single target/door open
-    /// 1 for double target/door open
-    /// </summary>
     [Tooltip("What type of puzzle will open this door?\n0 for single target/door opens.\n1 for double target/door opens.")]
     [SerializeField]
     int puzzleType_UseProperty;
+    [Tooltip("Point effector to resolve overlap.")]
+    [SerializeField]
+    PointEffector2D pointEffector;
 
     // Properties
     public bool IsSolved
@@ -45,8 +51,13 @@ public class Door : MonoBehaviour, IPuzzleSolution
         set
         {
             isSolved_UseProperty = value;
-            renderer.enabled = !isSolved_UseProperty;
-            collider.enabled = !isSolved_UseProperty;
+            if (isSolved_UseProperty)
+            {
+                renderer.enabled = false;
+                collider.enabled = false;
+            }
+            else
+                StartCoroutine(Reenable());
         }
     }
     public int PuzzleType
@@ -79,6 +90,7 @@ public class Door : MonoBehaviour, IPuzzleSolution
     {
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
+        compCollider = GetComponent<CompositeCollider2D>();
     }
 
     public void DoSolution()
@@ -89,5 +101,31 @@ public class Door : MonoBehaviour, IPuzzleSolution
     public void UndoSolution()
     {
         IsSolved = false;
+    }
+
+    IEnumerator Reenable()
+    {
+        collider.enabled = true;
+        if (compCollider != null)
+        {
+            compCollider.isTrigger = true;
+            yield return new WaitForSeconds(.1f);
+            if (overlapping && pointEffector != null)
+            {
+                pointEffector.enabled = true;
+                yield return new WaitForSeconds(.25f);
+                pointEffector.enabled = false;
+            }
+            overlapping = false;
+            if(!IsSolved)
+                compCollider.isTrigger = false;
+        }
+        if(!IsSolved)
+            renderer.enabled = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        overlapping = true;
     }
 }

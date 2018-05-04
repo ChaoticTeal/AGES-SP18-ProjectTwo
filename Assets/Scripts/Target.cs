@@ -35,7 +35,6 @@ public class Target : MonoBehaviour
         set
         {
             activated_UseProperty = value;
-            Debug.Log(activated_UseProperty);
             if (activated_UseProperty)
             {
                 if (OnActivated != null)
@@ -105,7 +104,6 @@ public class Target : MonoBehaviour
     private IEnumerator TargetTimer()
     {
         yield return new WaitForSeconds(timerLength);
-        Debug.Log("Deactivating target.");
         Activated = false;
         animator.SetBool("hit", false);
     }

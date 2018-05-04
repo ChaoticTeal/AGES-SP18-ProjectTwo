@@ -273,7 +273,7 @@ public class PlayerMovement: MonoBehaviour
     {
         if(collision.gameObject.tag == "TempWall")
         {
-            gameObject.transform.Translate(Vector3.left);
+            //gameObject.transform.Translate(Vector3.left);
         }
     }
 }

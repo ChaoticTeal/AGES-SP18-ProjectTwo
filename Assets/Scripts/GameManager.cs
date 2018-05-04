@@ -9,11 +9,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("List of all puzzle solutions in the game.")]
     [SerializeField]
     List<GameObject> solutions;
-    /*
-    [Tooltip("List of all targets in the game.")]
-    [SerializeField]
-    List<GameObject> targets;
-    */
 
 	// Use this for initialization
 	void Start () 
@@ -50,7 +45,6 @@ public class GameManager : MonoBehaviour
     /// <param name="index">The index of the trigger.</param>
     private void UnTriggerHandler(int type, int index)
     {
-        Debug.Log(type + " Target " + index + " deactivated.");
         // Loop through solutions
         foreach (GameObject s in solutions)
         {
@@ -92,7 +86,6 @@ public class GameManager : MonoBehaviour
     /// <param name="index">The index of the trigger.</param>
     private void TriggerHandler(int type, int index)
     {
-        Debug.Log(type + " Target " + index + " activated.");
         // Loop through solutions
         foreach(GameObject s in solutions)
         {

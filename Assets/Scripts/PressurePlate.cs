@@ -76,7 +76,6 @@ public class PressurePlate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Pressure plate entered.");
         if (collision.gameObject.tag == "Player")
         {
             Activated = true;
@@ -84,7 +83,6 @@ public class PressurePlate : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Pressure plate left.");
         if (collision.gameObject.tag == "Player" && isTempPlate)
             Activated = false;
     }

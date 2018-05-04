@@ -26627,6 +26627,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleIndex_UseProperty: 3
   puzzleType_UseProperty: 0
+  pointEffector: {fileID: 0}
 --- !u!483693784 &653822351
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -27141,6 +27142,7 @@ GameObject:
   - component: {fileID: 763786902}
   - component: {fileID: 763786901}
   - component: {fileID: 763786900}
+  - component: {fileID: 763786904}
   m_Layer: 0
   m_Name: RoomFourPlateTwo
   m_TagString: Untagged
@@ -27299,6 +27301,20 @@ Tilemap:
   m_TileRefreshArray:
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!114 &763786904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763786898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5b785e371ab6e46abfc451f64696ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puzzleIndex_UseProperty: 4
+  puzzleType_UseProperty: 0
+  pointEffector: {fileID: 0}
 --- !u!1 &797283976
 GameObject:
   m_ObjectHideFlags: 0
@@ -27452,6 +27468,7 @@ GameObject:
   - component: {fileID: 835148563}
   - component: {fileID: 835148562}
   - component: {fileID: 835148561}
+  - component: {fileID: 835148567}
   m_Layer: 0
   m_Name: RoomFourTempWallOne
   m_TagString: TempWall
@@ -27485,6 +27502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleIndex_UseProperty: 4
   puzzleType_UseProperty: 0
+  pointEffector: {fileID: 835148567}
 --- !u!66 &835148562
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -27495,7 +27513,7 @@ CompositeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_GeometryType: 0
@@ -27792,6 +27810,25 @@ Tilemap:
   m_TileRefreshArray:
   - serializedVersion: 1
     m_DirtyIndex: 0
+--- !u!250 &835148567
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 835148559}
+  m_Enabled: 0
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 256
+  m_ForceMagnitude: 1000
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 1
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0
 --- !u!1 &835990063
 GameObject:
   m_ObjectHideFlags: 0
@@ -27906,6 +27943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleIndex_UseProperty: 0
   puzzleType_UseProperty: 1
+  pointEffector: {fileID: 0}
 --- !u!66 &899323533
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -29697,6 +29735,7 @@ MonoBehaviour:
   - {fileID: 1266172327}
   - {fileID: 835148559}
   - {fileID: 653822345}
+  - {fileID: 763786898}
 --- !u!4 &1492731425
 Transform:
   m_ObjectHideFlags: 0
@@ -30222,6 +30261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleIndex_UseProperty: 0
   puzzleType_UseProperty: 0
+  pointEffector: {fileID: 0}
 --- !u!1001 &1719125763
 Prefab:
   m_ObjectHideFlags: 0
@@ -30677,6 +30717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleIndex_UseProperty: 0
   puzzleType_UseProperty: 1
+  pointEffector: {fileID: 0}
 --- !u!66 &1922107037
 CompositeCollider2D:
   m_ObjectHideFlags: 0
