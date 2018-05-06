@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: aba24879a70ca4e4db046764219690fc
-timeCreated: 1523046864
+timeCreated: 1525622595
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -3655,12 +3655,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -7, y: -4}
-        - {x: -7, y: -8}
-        - {x: 5, y: -8}
-        - {x: 5, y: -4}
-        - {x: 2, y: -1}
-        - {x: -4, y: -1}
+      - - {x: -4.8984985, y: -4.4944763}
+        - {x: -4.898468, y: -8}
+        - {x: 3.0220947, y: -8}
+        - {x: 3.2693481, y: -4.4944763}
+        - {x: 1.8763733, y: -2.8542786}
+        - {x: -3.2583008, y: -2.9779053}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_174
@@ -3967,9 +3967,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -7, y: 8}
-        - {x: -8, y: -7}
-        - {x: -7, y: -8}
+      - - {x: -5.0744324, y: 8}
+        - {x: -6.026306, y: -6.9518433}
+        - {x: -4.015381, y: -8}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
       tessellationDetail: 0
@@ -4027,9 +4027,9 @@ TextureImporter:
       - - {x: -8, y: 8}
         - {x: -8, y: -7}
         - {x: -7, y: -8}
-        - {x: 7, y: -8}
-        - {x: 8, y: -7}
-        - {x: 7, y: 8}
+        - {x: 3.9190674, y: -8}
+        - {x: 6.074463, y: -6.9518433}
+        - {x: 5.026306, y: 8}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_194
@@ -4224,12 +4224,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -7, y: -4}
-        - {x: -7, y: -8}
-        - {x: 5, y: -8}
-        - {x: 5, y: -4}
-        - {x: 2, y: -1}
-        - {x: -4, y: -1}
+      - - {x: -4.898468, y: -4.4944763}
+        - {x: -4.8984985, y: -8}
+        - {x: 3.0220947, y: -8}
+        - {x: 3.0220947, y: -4.3708496}
+        - {x: 1.381897, y: -3.2251282}
+        - {x: -3.6291504, y: -2.9779053}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_205
@@ -4244,12 +4244,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -5, y: -4}
-        - {x: -5, y: -8}
-        - {x: 7, y: -8}
-        - {x: 7, y: -4}
-        - {x: 4, y: -1}
-        - {x: -2, y: -1}
+      - - {x: -3.3930054, y: -4.123596}
+        - {x: -3.145691, y: -8}
+        - {x: 5.145691, y: -8}
+        - {x: 4.8984985, y: -4.4944763}
+        - {x: 3.8764038, y: -2.7306519}
+        - {x: -1.6291504, y: -2.8542786}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_206
@@ -4354,8 +4354,8 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -7, y: 8}
-        - {x: -7, y: -8}
+      - - {x: -5.0220947, y: 8}
+        - {x: -5.0221252, y: -8}
         - {x: 6, y: -8}
         - {x: 8, y: -6}
         - {x: 8, y: 8}
@@ -4374,10 +4374,10 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -8, y: 8}
-        - {x: -8, y: -6}
-        - {x: -6, y: -8}
-        - {x: 7, y: -8}
-        - {x: 7, y: 8}
+        - {x: -8, y: -4.1457214}
+        - {x: -3.4039917, y: -8}
+        - {x: 4.8984375, y: -8}
+        - {x: 4.8984985, y: 8}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_213
@@ -4392,13 +4392,13 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -4}
-        - {x: -7, y: -8}
-        - {x: 6, y: -8}
-        - {x: 8, y: 0}
-        - {x: 8, y: 5}
-        - {x: 5, y: 8}
+      - - {x: -5.033142, y: 8}
+        - {x: -5.033142, y: -4}
+        - {x: -5.083374, y: -8}
+        - {x: 2.9708252, y: -8}
+        - {x: 6.0221252, y: 3.090454}
+        - {x: 2.8080444, y: 5}
+        - {x: 3.0220947, y: 8}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_214
@@ -4413,12 +4413,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -6, y: 8}
-        - {x: -7, y: 3}
-        - {x: -7, y: -1}
-        - {x: -5, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: 8}
+      - - {x: -3.4039917, y: 8}
+        - {x: -4.8984985, y: 2.8763733}
+        - {x: -2.9205933, y: -0.75276184}
+        - {x: -3.145691, y: -8}
+        - {x: 5.1567993, y: -8}
+        - {x: 4.7859497, y: 8}
       tessellationDetail: 0
     - serializedVersion: 2
       name: tileset_215

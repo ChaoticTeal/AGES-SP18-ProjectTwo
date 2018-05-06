@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
@@ -9,18 +11,34 @@ public class GameManager : MonoBehaviour
     [Tooltip("List of all puzzle solutions in the game.")]
     [SerializeField]
     List<GameObject> solutions;
+    [Tooltip("Start transition panel.")]
+    [SerializeField]
+    Image fadePanel;
+    [Tooltip("Fade time.")]
+    [SerializeField]
+    float fadeTime;
+    [Tooltip("Next scene.")]
+    [SerializeField]
+    string nextScene;
+    
+    // Use this for initialization
+    void Start () 
+	{
+        StartCoroutine(FadeIn());
+	}
 
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
+    private IEnumerator FadeIn()
+    {
+        Color newColor = fadePanel.color;
+        while (fadePanel.color.a - 0 > .25)
+        {
+            newColor.a = Mathf.Lerp(fadePanel.color.a, 0, fadeTime * Time.deltaTime);
+            fadePanel.color = newColor;
+            yield return null;
+        }
+        newColor.a = 0;
+        fadePanel.color = newColor;
+    }
 
     private void OnEnable()
     {
@@ -28,6 +46,7 @@ public class GameManager : MonoBehaviour
         Target.OnDeactivated += UnTriggerHandler;
         PressurePlate.OnActivated += TriggerHandler;
         PressurePlate.OnDeactivated += UnTriggerHandler;
+        PlayerMovement.EndGame += EndGame;
     }
 
     private void OnDisable()
@@ -36,6 +55,7 @@ public class GameManager : MonoBehaviour
         Target.OnDeactivated -= UnTriggerHandler;
         PressurePlate.OnActivated -= TriggerHandler;
         PressurePlate.OnDeactivated -= UnTriggerHandler;
+        PlayerMovement.EndGame -= EndGame;
     }
 
     /// <summary>
@@ -118,5 +138,24 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void EndGame()
+    {
+        StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeOut()
+    {
+        Color newColor = fadePanel.color;
+        while (1 - fadePanel.color.a > .25)
+        {
+            newColor.a = Mathf.Lerp(fadePanel.color.a, 1, fadeTime * Time.deltaTime);
+            fadePanel.color = newColor;
+            yield return null;
+        }
+        newColor.a = 1;
+        fadePanel.color = newColor;
+        SceneManager.LoadScene(nextScene);
     }
 }

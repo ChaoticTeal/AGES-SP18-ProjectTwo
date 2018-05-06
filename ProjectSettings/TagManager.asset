@@ -10,6 +10,7 @@ TagManager:
   - Left
   - Key
   - TempWall
+  - EndTrigger
   layers:
   - Default
   - TransparentFX

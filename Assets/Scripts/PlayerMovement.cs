@@ -79,6 +79,10 @@ public class PlayerMovement: MonoBehaviour
     /// Player scale
     /// </summary>
     Vector3 scale;
+    /// <summary>
+    /// Has the endgame state been activated?
+    /// </summary>
+    bool endGame;
 
     // Public fields
     /// <summary>
@@ -89,6 +93,10 @@ public class PlayerMovement: MonoBehaviour
     /// Notify when collecting a key
     /// </summary>
     public static event Action<int> KeyCollected;
+    /// <summary>
+    /// Notify on entering game end trigger
+    /// </summary>
+    public static event Action EndGame;
 
     // Properties
     int KeyCount
@@ -243,6 +251,13 @@ public class PlayerMovement: MonoBehaviour
     {
         if (collision.tag == "Key")
             KeyCount++;
+        else if (collision.tag == "EndTrigger" && endGame == false)
+        {
+            if (EndGame != null)
+                EndGame.Invoke();
+            endGame = true;
+            canMove = false;
+        }
         else if (canChangeScreens)
         {
             // Loop through each of the four directions checking for screen shift tags
@@ -266,14 +281,6 @@ public class PlayerMovement: MonoBehaviour
                     }
                 }
             }
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "TempWall")
-        {
-            //gameObject.transform.Translate(Vector3.left);
         }
     }
 }
