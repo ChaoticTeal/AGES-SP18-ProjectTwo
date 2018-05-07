@@ -70,6 +70,10 @@ public class Target : MonoBehaviour
     /// </summary>
     Animator animator;
     /// <summary>
+    /// Audio source on the target
+    /// </summary>
+    AudioSource audioSource;
+    /// <summary>
     /// Has the target been hit?
     /// </summary>
     bool activated_UseProperty;
@@ -87,6 +91,7 @@ public class Target : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(ShineAnim());
     }
 
@@ -96,6 +101,7 @@ public class Target : MonoBehaviour
         {
             Activated = true;
             animator.SetBool("hit", true);
+            audioSource.Play();
             if (timerLength > 0)
                 StartCoroutine(TargetTimer());
         }

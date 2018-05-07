@@ -40,6 +40,11 @@ public class PlayerMovement: MonoBehaviour
     /// </summary>
     Animator animator;
     /// <summary>
+    /// Audio Source on object
+    /// </summary>
+    AudioSource audioSource;
+
+    /// <summary>
     /// Can the player change screens?
     /// </summary>
     bool canChangeScreens = true;
@@ -118,15 +123,19 @@ public class PlayerMovement: MonoBehaviour
 	{
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-        GetMoveInput();
-        GetFireInput();
-        if (shouldFire && canMove)
-            StartCoroutine(FireArrow());
+        if (canMove)
+        {
+            GetMoveInput();
+            GetFireInput();
+            if (shouldFire)
+                StartCoroutine(FireArrow());
+        }
         if (!canMove)
             rigidbody2D.velocity = Vector3.zero;
 	}
@@ -217,6 +226,7 @@ public class PlayerMovement: MonoBehaviour
             temp.transform.position = shootPoints[(int)currentDirection].position;
             temp.transform.rotation = shootPoints[(int)currentDirection].rotation;
         }
+        audioSource.Play();
         yield return new WaitForSeconds(arrowCooldown);
         shouldFire = false;
         canMove = true;

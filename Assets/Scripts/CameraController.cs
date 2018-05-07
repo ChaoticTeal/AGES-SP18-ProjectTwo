@@ -25,18 +25,6 @@ public class CameraController : MonoBehaviour
     /// </summary>
     public static event Action OnMoveFinished;
 
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
-
     private void OnEnable()
     {
         PlayerMovement.ScreenChangeTrigger += OnPlayerScreenChange;
