@@ -11,9 +11,12 @@ public class LockedDoor : MonoBehaviour
     {
         if(collision.gameObject.tag == "Key")
         {
-            if (DoorUnlocked != null)
-                DoorUnlocked.Invoke();
-            gameObject.SetActive(false);
+            if (FindObjectOfType<PlayerMovement>().KeyCount > 0)
+            {
+                if (DoorUnlocked != null)
+                    DoorUnlocked.Invoke();
+                gameObject.SetActive(false);
+            }
         }
     }
 }

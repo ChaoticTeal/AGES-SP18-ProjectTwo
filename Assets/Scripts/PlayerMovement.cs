@@ -104,7 +104,7 @@ public class PlayerMovement: MonoBehaviour
     public static event Action EndGame;
 
     // Properties
-    int KeyCount
+    public int KeyCount
     {
         get
         {
