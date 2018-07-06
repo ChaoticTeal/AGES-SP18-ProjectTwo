@@ -35,6 +35,8 @@ public class PressurePlate : MonoBehaviour
             if (activated_UseProperty)
             {
                 tilemap.SetTile(tilePosition, activeTile);
+                if (audioSource != null)
+                    audioSource.Play();
                 if (OnActivated != null)
                     // Notify that the target was hit, with its type and index
                     OnActivated.Invoke(TriggerType, TriggerIndex);
@@ -65,6 +67,10 @@ public class PressurePlate : MonoBehaviour
 
     // Private fields
     /// <summary>
+    /// AudioSource attached to pressure plate
+    /// </summary>
+    AudioSource audioSource;
+    /// <summary>
     /// Has the target been hit?
     /// </summary>
     bool activated_UseProperty;
@@ -89,6 +95,7 @@ public class PressurePlate : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         tilemap = GetComponent<Tilemap>();
         startingTile = (Tile)tilemap.GetTile(tilePosition);
     }

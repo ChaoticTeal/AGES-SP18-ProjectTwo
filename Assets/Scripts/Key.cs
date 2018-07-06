@@ -6,6 +6,10 @@ public class Key : MonoBehaviour, IPuzzleSolution
 {
     // Private fields
     /// <summary>
+    /// AudioSource attached to the key
+    /// </summary>
+    AudioSource audioSource;
+    /// <summary>
     /// Has the key been collected?
     /// </summary>
     bool isCollected;
@@ -99,16 +103,11 @@ public class Key : MonoBehaviour, IPuzzleSolution
     // Use this for initialization
     void Start () 
 	{
+        audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;
         renderer = GetComponent<Renderer>();
         renderer.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -116,6 +115,8 @@ public class Key : MonoBehaviour, IPuzzleSolution
         if(collision.tag == "Player")
         {
             isCollected = true;
+            if (audioSource != null)
+                audioSource.Play();
             boxCollider.enabled = false;
             renderer.enabled = false;
         }

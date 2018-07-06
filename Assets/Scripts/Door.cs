@@ -6,6 +6,10 @@ public class Door : MonoBehaviour, IPuzzleSolution
 {
     // Private fields
     /// <summary>
+    /// Audio source attached to the door
+    /// </summary>
+    AudioSource audioSource;
+    /// <summary>
     /// Is the door open?
     /// </summary>
     bool isSolved_UseProperty;
@@ -53,6 +57,8 @@ public class Door : MonoBehaviour, IPuzzleSolution
             isSolved_UseProperty = value;
             if (isSolved_UseProperty)
             {
+                if (audioSource != null)
+                    audioSource.Play();
                 renderer.enabled = false;
                 collider.enabled = false;
             }
@@ -88,6 +94,7 @@ public class Door : MonoBehaviour, IPuzzleSolution
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         renderer = GetComponent<Renderer>();
         collider = GetComponent<Collider2D>();
         compCollider = GetComponent<CompositeCollider2D>();

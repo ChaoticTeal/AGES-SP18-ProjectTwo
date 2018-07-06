@@ -2,10 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Target : MonoBehaviour
 {
     // SerializeFields
+    [Tooltip("Audio clips.")]
+    [SerializeField]
+    List<AudioClip> audioClips;
     [Tooltip("Maximum time between shine animations.")]
     [SerializeField]
     float shineDelayMax;
@@ -24,6 +28,9 @@ public class Target : MonoBehaviour
     [Tooltip("Time target remains active.\nIf 0, timer remains active indefinitely.")]
     [SerializeField]
     float timerLength;
+    [Tooltip("Mixer groups to switch between.")]
+    [SerializeField]
+    List<AudioMixerGroup> mixerGroups;
 
     // Properties
     bool Activated
@@ -101,6 +108,8 @@ public class Target : MonoBehaviour
         {
             Activated = true;
             animator.SetBool("hit", true);
+            audioSource.clip = audioClips[0];
+            audioSource.outputAudioMixerGroup = mixerGroups[0];
             audioSource.Play();
             if (timerLength > 0)
                 StartCoroutine(TargetTimer());
@@ -109,7 +118,21 @@ public class Target : MonoBehaviour
 
     private IEnumerator TargetTimer()
     {
-        yield return new WaitForSeconds(timerLength);
+        float totalTime = 0f, delay = 0f;
+        while(totalTime <= timerLength)
+        {
+            audioSource.clip = audioClips[1];
+            audioSource.outputAudioMixerGroup = mixerGroups[1];
+            audioSource.Play();
+            if (timerLength - totalTime > 2f)
+                delay = .5f;
+            else if (timerLength - totalTime > 1f)
+                delay = .25f;
+            else
+                delay = .1f;
+            totalTime += delay;
+            yield return new WaitForSeconds(delay);
+        }
         Activated = false;
         animator.SetBool("hit", false);
     }
