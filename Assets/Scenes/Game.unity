@@ -165,18 +165,6 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 20939739}
     m_ColliderPaths:
-    - - X: 150000000
-        Y: 630000000
-      - X: 60000000
-        Y: 630000000
-      - X: 60000000
-        Y: 550000000
-      - X: 10000000
-        Y: 550000000
-      - X: 10000000
-        Y: 460000000
-      - X: 150000000
-        Y: 460000000
     - - X: -20000000
         Y: 550000000
       - X: -70000000
@@ -188,6 +176,18 @@ CompositeCollider2D:
       - X: -150000000
         Y: 460000000
       - X: -20000000
+        Y: 460000000
+    - - X: 150000000
+        Y: 630000000
+      - X: 60000000
+        Y: 630000000
+      - X: 60000000
+        Y: 550000000
+      - X: 10000000
+        Y: 550000000
+      - X: 10000000
+        Y: 460000000
+      - X: 150000000
         Y: 460000000
     - - X: -10000000
         Y: 580000000
@@ -239,18 +239,18 @@ CompositeCollider2D:
         Y: 160000000
   m_CompositePaths:
     m_Paths:
-    - - {x: 15, y: 63}
-      - {x: 6, y: 63}
-      - {x: 6, y: 55}
-      - {x: 1, y: 55}
-      - {x: 1, y: 46}
-      - {x: 15, y: 46}
     - - {x: -2, y: 55}
       - {x: -7, y: 55}
       - {x: -7, y: 63}
       - {x: -15, y: 63}
       - {x: -15, y: 46}
       - {x: -2, y: 46}
+    - - {x: 15, y: 63}
+      - {x: 6, y: 63}
+      - {x: 6, y: 55}
+      - {x: 1, y: 55}
+      - {x: 1, y: 46}
+      - {x: 15, y: 46}
     - - {x: -1, y: 58}
       - {x: -2, y: 58}
       - {x: -2, y: 57}
@@ -37390,7 +37390,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: bb8c308206062724e94c75fc7eaf3d33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -39450,7 +39450,7 @@ Transform:
   m_Children:
   - {fileID: 615789866}
   m_Father: {fileID: 1009179485}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &949578705
 MonoBehaviour:
@@ -39629,7 +39629,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
@@ -39914,8 +39914,8 @@ Transform:
   - {fileID: 1691921100}
   - {fileID: 899323531}
   - {fileID: 1922107035}
-  - {fileID: 1333095009}
   - {fileID: 949578704}
+  - {fileID: 1333095009}
   - {fileID: 835148560}
   - {fileID: 653822346}
   - {fileID: 1616718675}
@@ -41231,7 +41231,7 @@ Transform:
   m_Children:
   - {fileID: 1109591285}
   m_Father: {fileID: 1009179485}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1333095010
 MonoBehaviour:
@@ -43309,7 +43309,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7, y: 5}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!4 &1714429731
 Transform:
@@ -43318,7 +43318,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1714429729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 60.5, z: 0}
+  m_LocalPosition: {x: -0.5, y: 58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
