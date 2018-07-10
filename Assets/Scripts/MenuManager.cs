@@ -26,6 +26,8 @@ public class MenuManager : MonoBehaviour
 
     // public fields
     public static event Action GameStarting;
+    public static event Action EndPanelUp;
+    public static event Action EndPanelDown;
 
 
     private void OnEnable()
@@ -58,6 +60,9 @@ public class MenuManager : MonoBehaviour
                 break;
             case "Exit":
                 exitPanel.SetActive(true);
+                if (EndPanelUp != null)
+                    EndPanelUp.Invoke();
+                exitPanel.transform.GetComponentInChildren<Button>().Select();
                 break;
         }
     }
@@ -90,5 +95,7 @@ public class MenuManager : MonoBehaviour
     public void ExitButtonNo()
     {
         exitPanel.SetActive(false);
+        if (EndPanelDown != null)
+            EndPanelDown.Invoke();
     }
 }

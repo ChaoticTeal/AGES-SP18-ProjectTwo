@@ -154,6 +154,8 @@ public class PlayerMovement: MonoBehaviour
         CameraController.OnMoveFinished += EndScreenTransition;
         LockedDoor.DoorUnlocked += UseKey;
         MenuManager.GameStarting += StopMove;
+        MenuManager.EndPanelUp += StopMove;
+        MenuManager.EndPanelDown += StartMove;
     }
 
     private void OnDisable()
@@ -161,6 +163,8 @@ public class PlayerMovement: MonoBehaviour
         CameraController.OnMoveFinished -= EndScreenTransition;
         LockedDoor.DoorUnlocked -= UseKey;
         MenuManager.GameStarting -= StopMove;
+        MenuManager.EndPanelUp -= StopMove;
+        MenuManager.EndPanelDown -= StartMove;
     }
 
     /// <summary>
@@ -242,6 +246,11 @@ public class PlayerMovement: MonoBehaviour
     void StopMove()
     {
         canMove = false;
+    }
+
+    void StartMove()
+    {
+        canMove = true;
     }
 
     void EndScreenTransition()
